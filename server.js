@@ -37,9 +37,10 @@ app.use(bodyParser.json({ type: 'application/vnd.api+json' })); // parse applica
 app.use(methodOverride());
 
 var Todo = mongoose.model('Todo', {
-    text : String,
+    text: String,
     time: String
 });
+
 app.get('/api/todos', function(req, res) {
 
     // use mongoose to get all todos in the database
@@ -72,7 +73,6 @@ app.post('/api/todos', function(req, res) {
     });
 
 });
-
 // delete a todo
 app.delete('/api/todos/:todo_id', function(req, res) {
     Todo.remove({

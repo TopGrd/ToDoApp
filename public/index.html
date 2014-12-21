@@ -8,7 +8,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Optimize mobile viewport -->
 
-    <title>Node/Angular Todo App</title>
+    <title>你的个人ToDo App</title>
 
     <!-- SCROLLS -->
     <link href="http://cdn.bootcss.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet">
@@ -52,19 +52,21 @@
                 </label>
             </div>
 
+
         </div>
     </div>
 
     <!-- FORM TO CREATE TODOS -->
     <div id="todo-form" class="row">
         <div class="col-sm-8 col-sm-offset-2 text-center">
-            <form class="form-horizontal" role="form">
+            <form name="myform" class="form-horizontal" role="form">
                 <div class="form-group">
 
                     <!-- BIND THIS VALUE TO formData.text IN ANGULAR -->
                     <label for="todo" class="col-sm-4 control-label">添加一个任务</label>
                     <div class="col-sm-8">
-                        <input id="todo" type="text" class="form-control input-lg text-center" placeholder="添加一个任务" ng-model="formData.text">
+                        <input id="todo" name="tododet" type="text" class="form-control input-lg text-center" placeholder="添加一个任务" ng-model="formData.text" required>
+                        <div class="alert alert-danger well-sm" ng-show="myform.tododet.$error.required">任务不能为空！</div>
                     </div>
 
 
@@ -74,7 +76,7 @@
                     <!-- BIND THIS VALUE TO formData.text IN ANGULAR -->
                     <label for="todo" class="col-sm-4 control-label">截止时间</label>
                     <div class="col-sm-8">
-                        <input type="date" class="form-control input-lg text-center" placeholder="截止时间" ng-model="formData.time">
+                        <input type="date" class="form-control input-lg text-center" placeholder="截止时间" ng-model="formData.time" required="">
                     </div>
 
 
@@ -84,7 +86,8 @@
                 <!-- createToDo() WILL CREATE NEW TODOS -->
                 <div class="form-group">
                     <div class="col-sm-offset-4 col-sm-8">
-                        <button type="submit" class="btn btn-primary btn-lg btn-block" ng-click="createTodo()">Add</button>
+                        <button type="submit" class="btn btn-primary btn-lg btn-block" ng-disabled="!myform.$valid" ng-click="createTodo()">Add</button>
+                    </div>
                     </div>
 
             </form>
