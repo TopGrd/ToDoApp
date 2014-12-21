@@ -11,11 +11,19 @@
     <title>Node/Angular Todo App</title>
 
     <!-- SCROLLS -->
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css"><!-- load bootstrap -->
+    <link href="http://cdn.bootcss.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <!-- load bootstrap -->
     <style>
         html                    { overflow-y:scroll; }
         body                    { padding-top:50px; }
         #todo-list              { margin-bottom:30px; }
+        a,a:hover{
+            text-decoration: none;
+        }
+        .timefortodo{
+            float: right;
+        }
+
     </style>
 
     <!-- SPELLS -->
@@ -35,12 +43,12 @@
 
     <!-- TODO LIST -->
     <div id="todo-list" class="row">
-        <div class="col-sm-4 col-sm-offset-4">
+        <div class="col-sm-4 col-sm-offset-5">
 
             <!-- LOOP OVER THE TODOS IN $scope.todos -->
             <div class="checkbox" ng-repeat="todo in todos">
-                <label>
-                    <input type="checkbox" ng-click="deleteTodo(todo._id)"> {{ todo.text }}
+                <label class="col-sm-12">
+                    <input type="checkbox" ng-click="deleteTodo(todo._id)"> {{ todo.text }}<a class="timefortodo">{{todo.time}}</a>
                 </label>
             </div>
 
@@ -50,20 +58,39 @@
     <!-- FORM TO CREATE TODOS -->
     <div id="todo-form" class="row">
         <div class="col-sm-8 col-sm-offset-2 text-center">
-            <form>
+            <form class="form-horizontal" role="form">
                 <div class="form-group">
 
                     <!-- BIND THIS VALUE TO formData.text IN ANGULAR -->
-                    <input type="text" class="form-control input-lg text-center" placeholder="I want to buy a puppy that will love me forever" ng-model="formData.text">
+                    <label for="todo" class="col-sm-4 control-label">添加一个任务</label>
+                    <div class="col-sm-8">
+                        <input id="todo" type="text" class="form-control input-lg text-center" placeholder="添加一个任务" ng-model="formData.text">
+                    </div>
+
+
+                </div>
+                <div class="form-group">
+
+                    <!-- BIND THIS VALUE TO formData.text IN ANGULAR -->
+                    <label for="todo" class="col-sm-4 control-label">截止时间</label>
+                    <div class="col-sm-8">
+                        <input type="date" class="form-control input-lg text-center" placeholder="截止时间" ng-model="formData.time">
+                    </div>
+
+
                 </div>
 
+
                 <!-- createToDo() WILL CREATE NEW TODOS -->
-                <button type="submit" class="btn btn-primary btn-lg" ng-click="createTodo()">Add</button>
+                <div class="form-group">
+                    <div class="col-sm-offset-4 col-sm-8">
+                        <button type="submit" class="btn btn-primary btn-lg btn-block" ng-click="createTodo()">Add</button>
+                    </div>
+
             </form>
         </div>
     </div>
 
 </div>
-
 </body>
 </html>
